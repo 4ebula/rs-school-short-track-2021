@@ -21,8 +21,28 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const maxY = matrix.length;
+  const maxX = matrix[0].length;
+  const arr = new Array(maxY);
+  for (let i = 0; i < maxY; i++) {
+    arr[i] = new Array(maxX).fill(0);
+    for (let j = 0; j < maxX; j++) {
+      if (i - 1 >= 0) {
+        if (j - 1 >= 0 && matrix[i - 1][j - 1]) arr[i][j]++;
+        if (matrix[i - 1][j]) arr[i][j]++;
+        if (j + 1 < maxX && matrix[i - 1][j + 1]) arr[i][j]++;
+      }
+      if (i + 1 < maxY) {
+        if (j - 1 >= 0 && matrix[i + 1][j - 1]) arr[i][j]++;
+        if (matrix[i + 1][j]) arr[i][j]++;
+        if (j + 1 < maxX && matrix[i + 1][j + 1]) arr[i][j]++;
+      }
+      if (j - 1 >= 0 && matrix[i][j - 1]) arr[i][j]++;
+      if (j + 1 < maxX && matrix[i][j + 1]) arr[i][j]++;
+    }
+  }
+  return arr;
 }
 
 module.exports = minesweeper;
