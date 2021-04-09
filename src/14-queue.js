@@ -15,28 +15,28 @@ class Queue {
   constructor(value) {
     this.value = value;
     this.next = null;
+    console.log('THIS', this, '\n\n');
   }
 
   get size() {
     let depth = 0;
-    for (let i = this; i !== null; i = this.next, depth++);
+    for (let i = this; i.next !== null; i = this.next, depth++);
     return depth;
   }
 
   enqueue(element) {
-    const endNode = this.getEnd();
-    endNode.next = ListNode(element);
+    const depth = this.size;
+    let endNode = this;
+    for (let i = 0; i < depth; endNode = this.next, i++);
+    console.log('THIS endnode', endNode, 'End of this');
+    endNode.next = new ListNode(element);
+    console.log(this);
   }
 
   dequeue() {
-    throw new Error('Not implemented');
-  }
-
-  getEnd() {
-    let list = {};
-    for (list = this; list !== null; list = this.next);
-    return list;
+    return this.next;
+    // throw new Error('Not implemented');
   }
 }
-console.log('IT', Queue.prototype.constructor);
+
 module.exports = Queue;
