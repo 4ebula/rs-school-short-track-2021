@@ -22,7 +22,6 @@ class Queue {
   }
 
   enqueue(element) {
-    console.log('Enqueue: ', element);
     let endNode = this;
     if (this.size === 0) {
       Object.assign(endNode, new ListNode(element));
@@ -30,12 +29,17 @@ class Queue {
       for (; endNode.next !== null; endNode = endNode.next);
       endNode.next = new ListNode(element);
     }
-    console.log('THIS: ', this);
-    console.log('\n\n');
   }
 
   dequeue() {
-    throw new Error('Not implemented');
+    const { value, next } = this;
+    if (next === null) {
+      Object.assign(this, null);
+    } else {
+      Object.assign(this, new ListNode(next.value));
+      this.next = next.next;
+    }
+    return value;
   }
 }
 
